@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { PostContextProvider } from "./src/context/PostContext";
 import { UserContextProvider } from "./src/context/UserContext";
 import { LoginUser } from "./src/screens/LoginUser";
+import { FullScreenImage } from "./src/components/FullScreenImage";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,9 @@ export default function App() {
               <Stack.Screen name="home" component={Home} />
               <Stack.Screen name="post/create" component={CreatePost} />
               <Stack.Screen name="user/login" component={LoginUser} />
+              <Stack.Screen name="user/profile" component={FullScreenImage} options={{
+                headerShown: false
+              }}/>
             </Stack.Navigator>
           </PostContextProvider>
         </NavigationContainer>

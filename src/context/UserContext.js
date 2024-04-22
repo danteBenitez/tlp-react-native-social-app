@@ -12,8 +12,8 @@ export const useUser = () => useContext(UserContext);
 export function UserContextProvider({ children }) {
     const [user, setUser] = useState(ANON_USER);
 
-    const updateUser = () => {
-        setUser(user);
+    const updateUser = (userInfo) => {
+        setUser({ ...user, ...userInfo });
     }
 
     return <UserContext.Provider value={{

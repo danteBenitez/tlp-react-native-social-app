@@ -1,6 +1,14 @@
 {
   "expo": {
     "name": "todo-app",
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Esta app requiere de permisos para ver imágenes del dispositivo."
+        }
+      ]
+    ],
     "slug": "todo-app",
     "version": "1.0.0",
     "orientation": "portrait",

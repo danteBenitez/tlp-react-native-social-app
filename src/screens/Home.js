@@ -4,7 +4,7 @@ import { Feed } from "../components/Feed";
 export function Home({ navigation }) {
   return (
     <View>
-        <Feed />
+        <Feed navigation={navigation} />
     </View>
   );
 }

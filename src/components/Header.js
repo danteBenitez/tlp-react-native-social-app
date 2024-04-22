@@ -1,10 +1,10 @@
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Appbar, useTheme } from "react-native-paper";
+import { ProfilePhoto } from "./ProfilePhoto";
 
 export function Header({ navigation }) {
   const theme = useTheme();
   const handlePostCreation = () => {
-    console.log("pressed");
     navigation.navigate("post/create");
   };
 
@@ -14,7 +14,8 @@ export function Header({ navigation }) {
 
   return (
     <View>
-      <Appbar.Header>
+      <Appbar.Header style={styles.appbar}>
+        <ProfilePhoto size={30} style={styles.profile} />
         <Appbar.Content title="Social Media" color={theme.colors.primary} />
         <Appbar.Action icon="account-edit" onPress={handleAccountCreation} />
         <Appbar.Action icon="pencil" onPress={handlePostCreation} />
@@ -22,3 +23,15 @@ export function Header({ navigation }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  appbar: {
+    padding: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  profile: {
+    marginHorizontal: 10,
+  }
+});
