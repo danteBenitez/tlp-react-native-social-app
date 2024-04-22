@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const ANON_USER = {
     username: "Anon",
@@ -6,6 +6,8 @@ const ANON_USER = {
 }
 
 const UserContext = createContext();
+
+export const API_URL = 'http://192.168.217.151:8083';
 
 export const useUser = () => useContext(UserContext);
 

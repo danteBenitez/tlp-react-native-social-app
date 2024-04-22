@@ -29,6 +29,7 @@ export function LoginUser({ navigation }) {
     if (result.canceled) {
       return;
     }
+    console.log(result);
     setFile(result.assets[0]);
     updateUser({
       profilePic: result.assets[0].uri,

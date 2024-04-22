@@ -16,7 +16,7 @@ export function Header({ navigation }) {
     <View>
       <Appbar.Header style={styles.appbar}>
         <ProfilePhoto size={30} style={styles.profile} />
-        <Appbar.Content title="Social Media" color={theme.colors.primary} />
+        <Appbar.Content title="Social Medi" color={theme.colors.primary} />
         <Appbar.Action icon="account-edit" onPress={handleAccountCreation} />
         <Appbar.Action icon="pencil" onPress={handlePostCreation} />
       </Appbar.Header>
