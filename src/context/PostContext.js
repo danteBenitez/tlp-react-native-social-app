@@ -1,10 +1,10 @@
-import { createContext, useContext, useState } from "react";
-import { API_URL } from "./UserContext";
-import axios from "axios";
+import { createContext, useEffect, useContext, useState } from "react";
 
 const PostContext = createContext();
 
 export const usePosts = () => useContext(PostContext);
+
+export const API_URL = 'http://192.168.0.106:8083';
 
 const DEFAULT_POST = {
   id: 0,
@@ -21,7 +21,6 @@ export function PostContextProvider({ children }) {
   const [posts, setPosts] = useState([DEFAULT_POST]);
 
   const createPost = (post) => {
-    setPosts([...posts, post]);
     const body = new FormData();
     body.append("title", post.title);
     body.append("body", post.body);
@@ -37,9 +36,9 @@ export function PostContextProvider({ children }) {
 
     fetch(API_URL + "/post", {
         method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        // },
         body
       })
       .then((res) => res.json())
@@ -47,9 +46,24 @@ export function PostContextProvider({ children }) {
         console.log("data: ", data);
       })
       .catch((err) => {
+        console.log(Object.keys(err));
+        console.log(err);
         console.error("Petición fallida: ", err);
       });
   };
+
+  useEffect(() => {
+    fetch(API_URL + "/post")
+      .then(res => { return res.json() })
+      .then((data) => {
+        const newData = data.map(post => ({
+          ...post,
+          createdAt: new Date(post.createdAt)
+        }))
+        setPosts(newData);
+      })
+      .catch(console.error);
+  }, []);
 
   const deletePost = (id) => {
     const newPosts = posts.filter((post) => post.id !== id);

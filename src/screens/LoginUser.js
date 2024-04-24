@@ -19,7 +19,6 @@ export function LoginUser({ navigation }) {
     },
     mode: "onChange",
   });
-  console.log(file?.uri);
 
   const handleProfilePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -29,7 +28,6 @@ export function LoginUser({ navigation }) {
     if (result.canceled) {
       return;
     }
-    console.log(result);
     setFile(result.assets[0]);
     updateUser({
       profilePic: result.assets[0].uri,

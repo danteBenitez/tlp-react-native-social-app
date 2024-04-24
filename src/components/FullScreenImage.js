@@ -9,7 +9,6 @@ import { Appbar } from "react-native-paper";
 
 export function FullScreenImage({ navigation, route }) {
   const uri = route.params.uri;
-  console.log({ uri });
   const text = route.params.text;
 
   return (

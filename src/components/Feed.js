@@ -10,7 +10,6 @@ export function Feed({ navigation }) {
       text: "Perfil de " + user.username,
     });
   };
-  console.log(navigation);
 
   return (
     <ScrollView tyle={styles.feed} scrollEnabled={true}>

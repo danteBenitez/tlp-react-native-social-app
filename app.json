@@ -7,6 +7,15 @@
         {
           "photosPermission": "Esta app requiere de permisos para ver imágenes del dispositivo."
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true,
+            "kotlinVersion": "1.9.0"
+          }
+        }
       ]
     ],
     "slug": "todo-app",
@@ -30,6 +39,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "usesCleartextTraffic": true, 
       "package": "com.anonymous.social"
     },
     "web": {
