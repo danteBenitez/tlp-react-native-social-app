@@ -1,6 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { API_URL } from "./UserContext";
-import axios from "axios";
 
 const PostContext = createContext();
 
@@ -19,37 +18,67 @@ const DEFAULT_POST = {
 
 export function PostContextProvider({ children }) {
   const [posts, setPosts] = useState([DEFAULT_POST]);
+  const [refetch, setRefetch] = useState(true);
 
   const createPost = (post) => {
-    setPosts([...posts, post]);
     const body = new FormData();
     body.append("title", post.title);
-    body.append("body", post.body);
-    body.append("createdAt", post.createdAt);
+    body.append("content", post.body);
+    body.append("createdAt", new Date().toISOString());
     body.append("username", post.user.username);
     const fileParts = post.user.profilePic.split(".");
     const fileType = fileParts[fileParts.length - 1];
-    body.append("profilePic", {
+    body.append("profile-pic", {
       uri: post.user.profilePic,
       name: `profile.${fileType}`,
       type: `image/${fileType}`,
     });
 
     fetch(API_URL + "/post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "multipart/form-data",
+      },
+      body,
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json();
       })
-      .then((res) => res.json())
       .then((data) => {
         console.log("data: ", data);
+        setRefetch(true);
       })
       .catch((err) => {
-        console.error("Petición fallida: ", err);
+        console.error("Petición fallida (POST): ", err);
       });
   };
+
+  useEffect(() => {
+    if (refetch)
+      fetch(API_URL + "/post")
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data) return;
+          setPosts(
+            data.map((post) => ({
+              ...post,
+              user: {
+                ...post.user,
+                profilePic: API_URL + post.user.profilePic,
+              },
+              createdAt: new Date(post.createdAt),
+            }))
+          );
+        })
+        .catch((err) => {
+          console.error("Petición fallida: (GET)", err);
+        })
+        .finally(() => {
+          setRefetch(false);
+        });
+  }, [refetch]);
 
   const deletePost = (id) => {
     const newPosts = posts.filter((post) => post.id !== id);

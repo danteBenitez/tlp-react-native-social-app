@@ -5,13 +5,14 @@ import { Home } from "./src/screens/Home";
 import { CreatePost } from "./src/screens/CreatePost";
 import { NavigationContainer } from "@react-navigation/native";
 import { PostContextProvider } from "./src/context/PostContext";
-import { UserContextProvider } from "./src/context/UserContext";
+import { API_URL, UserContextProvider } from "./src/context/UserContext";
 import { LoginUser } from "./src/screens/LoginUser";
 import { FullScreenImage } from "./src/components/FullScreenImage";
+import { useEffect } from "react";
 
 const Stack = createNativeStackNavigator();
-
 export default function App() {
+
   return (
     <PaperProvider>
       <UserContextProvider>
@@ -26,9 +27,13 @@ export default function App() {
               <Stack.Screen name="home" component={Home} />
               <Stack.Screen name="post/create" component={CreatePost} />
               <Stack.Screen name="user/login" component={LoginUser} />
-              <Stack.Screen name="user/profile" component={FullScreenImage} options={{
-                headerShown: false
-              }}/>
+              <Stack.Screen
+                name="user/profile"
+                component={FullScreenImage}
+                options={{
+                  headerShown: false,
+                }}
+              />
             </Stack.Navigator>
           </PostContextProvider>
         </NavigationContainer>

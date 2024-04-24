@@ -30,10 +30,18 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.social"
+      "package": "com.anonymous.social",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0275ea49-0f10-4f31-8eb3-8d9351595a53"
+      }
     }
   }
 }
