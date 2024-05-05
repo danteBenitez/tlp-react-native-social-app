@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 import { createContext, useContext, useEffect, useState } from "react";
 import { API_URL } from "./UserContext";
-=======
-import { createContext, useEffect, useContext, useState } from "react";
->>>>>>> 5f134953cc93d3f23de0675211b1f9e1078b8d7f
-
 const PostContext = createContext();
-
-export const usePosts = () => useContext(PostContext);
 
 export const API_URL = 'http://192.168.0.106:8083';
 
