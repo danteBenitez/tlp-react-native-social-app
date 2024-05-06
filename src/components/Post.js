@@ -1,6 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { Card, Text } from "react-native-paper";
 import { ProfilePreviewHeader } from "./ProfilePreviewHeader";
+import { ScaledSheet } from "react-native-size-matters";
 
 export function Post({ post, onProfilePress }) {
   return (
@@ -19,10 +20,12 @@ export function Post({ post, onProfilePress }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal: '20@s',
+        paddingVertical: '6@vs'
     }
 })

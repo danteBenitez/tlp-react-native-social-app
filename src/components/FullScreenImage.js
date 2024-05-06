@@ -2,7 +2,6 @@ import {
   Image,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import { Appbar } from "react-native-paper";
@@ -17,7 +16,7 @@ export function FullScreenImage({ navigation, route }) {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={text} />
       </Appbar.Header>
-      <View style={styles.view}>
+      <View style={styles.view}> 
         <Image
           source={{ uri }}
           height={500}

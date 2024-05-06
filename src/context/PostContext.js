@@ -1,24 +1,47 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { API_URL } from "./UserContext";
+import { getExamplePosts, getPosts } from "../services/posts";
 
 const PostContext = createContext();
 
 export const usePosts = () => useContext(PostContext);
 
-const DEFAULT_POST = {
-  id: 0,
-  title: "Welcome to my social network app!",
-  body: "asdasdasd",
-  createdAt: new Date(),
-  user: {
-    username: "johndoe",
-    profilePic: "https://i.pravatar.cc/100",
-  },
-};
+// Mostramos posteos de ejemplo usando una API de citas aleatorias
+// y de fotos de perfiles aleatorias
+const useExamplePosts = () => {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+      loadPosts();
+    }, []);
+
+    const loadPosts = async () => {
+      const examplePosts = await getExamplePosts();
+      setPosts(examplePosts);
+    }
+
+    return { posts, update: loadPosts };
+}
 
 export function PostContextProvider({ children }) {
-  const [posts, setPosts] = useState([DEFAULT_POST]);
-  const [refetch, setRefetch] = useState(true);
+  const [posts, setPosts] = useState([]);
+  const { posts: examplePosts } = useExamplePosts();
+  const [loading, setLoading] = useState(true);
+
+  const loadPosts = async () => {
+    setLoading(true);
+    const posts = await getPosts();
+    if (!posts) return;
+    const mapped = posts.map((post) => ({
+        ...post,
+        user: {
+          ...post.user,
+          profilePic: API_URL + post.user.profilePic ?? '',
+        },
+        createdAt: new Date(post.createdAt),
+    }))
+    setPosts([...mapped]);
+  }
 
   const createPost = (post) => {
     const body = new FormData();
@@ -35,51 +58,18 @@ export function PostContextProvider({ children }) {
       });
     }
 
-    fetch(API_URL + "/post", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "multipart/form-data",
-      },
-      body,
-    })
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((data) => {
-        console.log("data: ", data);
-        setRefetch(true);
-      })
-      .catch((err) => {
-        console.error("Petición fallida (POST): ", err);
-      });
+    const result = createPost(body);
+    return result;
   };
 
   useEffect(() => {
-    if (refetch)
-      fetch(API_URL + "/post")
-        .then((res) => res.json())
-        .then((data) => {
-          if (!data) return;
-          setPosts(
-            data.map((post) => ({
-              ...post,
-              user: {
-                ...post.user,
-                profilePic: API_URL + post.user.profilePic,
-              },
-              createdAt: new Date(post.createdAt),
-            }))
-          );
-        })
-        .catch((err) => {
-          console.error("Petición fallida: (GET)", err);
-        })
-        .finally(() => {
-          setRefetch(false);
-        });
-  }, [refetch]);
+    setPosts([...examplePosts, ...posts]);
+    setLoading(false);
+  }, [examplePosts]);
+
+  useEffect(() => {
+    loadPosts();
+  }, []);
 
   const deletePost = (id) => {
     const newPosts = posts.filter((post) => post.id !== id);
@@ -99,6 +89,7 @@ export function PostContextProvider({ children }) {
   return (
     <PostContext.Provider
       value={{
+        loading,
         posts,
         createPost,
         deletePost,
