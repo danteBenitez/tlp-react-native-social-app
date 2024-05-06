@@ -25,13 +25,15 @@ export function PostContextProvider({ children }) {
     body.append("title", post.title);
     body.append("content", post.body);
     body.append("username", post.user.username);
-    const fileParts = post.user.profilePic.split(".");
-    const fileType = fileParts[fileParts.length - 1];
-    body.append("profile-pic", {
-      uri: post.user.profilePic,
-      name: `profile.${fileType}`,
-      type: `image/${fileType}`,
-    });
+    if (post.user.profilePic) {
+      const fileParts = post.user.profilePic.split(".");
+      const fileType = fileParts[fileParts.length - 1];
+      body.append("profile-pic", {
+        uri: post.user.profilePic,
+        name: `profile.${fileType}`,
+        type: `image/${fileType}`,
+      });
+    }
 
     fetch(API_URL + "/post", {
       method: "POST",

@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, FlatList } from "react-native";
 import { usePosts } from "../context/PostContext";
 import { Post } from "./Post";
 import { ROUTES } from "../screens/routes";
@@ -14,11 +14,12 @@ export function Feed({ navigation }) {
   console.log("Renderizando posts", posts);
 
   return (
-    <ScrollView style={styles.feed} scrollEnabled={true}>
-      {posts.map((p) => (
+    <FlatList
+      data={posts}
+      renderItem={({ item: p }) => (
         <Post key={p.id} post={p} onProfilePress={handleProfilePress} />
-      ))}
-    </ScrollView>
+      )}
+    />
   );
 }
 
