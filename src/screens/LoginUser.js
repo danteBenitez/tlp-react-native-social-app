@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { FormBuilder } from "react-native-paper-form-builder";
 import * as ImagePicker from "expo-image-picker";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { Button } from "react-native-paper";
 import { useUser } from "../context/UserContext";
 import { ProfilePhoto } from "../components/ProfilePhoto";
 import { ROUTES } from "./routes";
+import { Text } from "react-native-paper";
 
 const IMAGE_SIZE = 200;
 

@@ -1,8 +1,8 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { FormBuilder } from "react-native-paper-form-builder";
 import { useForm } from "react-hook-form";
-import { Button } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import { usePosts } from "../context/PostContext";
 import { useUser } from "../context/UserContext";
 import { ROUTES } from "./routes";

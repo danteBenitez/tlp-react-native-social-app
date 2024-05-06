@@ -11,7 +11,6 @@ export function Feed({ navigation }) {
       text: "Perfil de " + user.username,
     });
   };
-  console.log("Renderizando posts", posts);
 
   return (
     <FlatList
