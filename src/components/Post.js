@@ -14,7 +14,6 @@ export function Post({ post, onProfilePress }) {
         <Card.Content>
           <Text variant="bodyMedium">{post.body}</Text>
         </Card.Content>
-        {/* <Card.Cover source={{ uri: post.image }} /> */}
       </Card>
     </View>
   );

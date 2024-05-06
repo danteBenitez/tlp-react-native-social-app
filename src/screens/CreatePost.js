@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "react-native-paper";
 import { usePosts } from "../context/PostContext";
 import { useUser } from "../context/UserContext";
+import { ROUTES } from "./routes";
 
 export function CreatePost({ navigation }) {
   const { createPost, posts } = usePosts();
@@ -66,7 +67,7 @@ export function CreatePost({ navigation }) {
               createdAt: new Date(),
               user,
             });
-            navigation.navigate("home");
+            navigation.navigate(ROUTES.HOME);
           })}
         >
             Postear

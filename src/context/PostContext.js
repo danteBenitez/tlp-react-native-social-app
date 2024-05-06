@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 import { createContext, useContext, useEffect, useState } from "react";
 import { API_URL } from "./UserContext";
-=======
-import { createContext, useEffect, useContext, useState } from "react";
->>>>>>> 5f134953cc93d3f23de0675211b1f9e1078b8d7f
 
 const PostContext = createContext();
 
 export const usePosts = () => useContext(PostContext);
-
-export const API_URL = 'http://192.168.0.106:8083';
 
 const DEFAULT_POST = {
   id: 0,
@@ -24,13 +18,12 @@ const DEFAULT_POST = {
 
 export function PostContextProvider({ children }) {
   const [posts, setPosts] = useState([DEFAULT_POST]);
-  const [refetch, setRefetch] = useState(true);
+  const [refetch, setRefetch] = useState(false);
 
   const createPost = (post) => {
     const body = new FormData();
     body.append("title", post.title);
     body.append("content", post.body);
-    body.append("createdAt", new Date().toISOString());
     body.append("username", post.user.username);
     const fileParts = post.user.profilePic.split(".");
     const fileType = fileParts[fileParts.length - 1];

@@ -2,23 +2,14 @@ import { StyleSheet, View } from "react-native";
 import { Appbar, useTheme } from "react-native-paper";
 import { ProfilePhoto } from "./ProfilePhoto";
 
-export function Header({ navigation }) {
+export function Header() {
   const theme = useTheme();
-  const handlePostCreation = () => {
-    navigation.navigate("post/create");
-  };
-
-  const handleAccountCreation = () => {
-    navigation.navigate("user/login");
-  }
 
   return (
     <View>
       <Appbar.Header style={styles.appbar}>
         <ProfilePhoto size={30} style={styles.profile} />
-        <Appbar.Content title="Social Medi" color={theme.colors.primary} />
-        <Appbar.Action icon="account-edit" onPress={handleAccountCreation} />
-        <Appbar.Action icon="pencil" onPress={handlePostCreation} />
+        <Appbar.Content title={"Social media"} color={theme.colors.primary} />
       </Appbar.Header>
     </View>
   );
