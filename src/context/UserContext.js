@@ -8,7 +8,6 @@ const ANON_USER = {
 const UserContext = createContext();
 
 export const API_URL = process.env.EXPO_PUBLIC_API_URL;
-console.log(API_URL);
 
 export const useUser = () => useContext(UserContext);
 

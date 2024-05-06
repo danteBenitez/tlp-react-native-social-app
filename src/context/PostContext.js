@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { API_URL } from "./UserContext";
-import { getExamplePosts, getPosts } from "../services/posts";
+import { createPost as createPostService, getExamplePosts, getPosts } from "../services/posts";
 
 const PostContext = createContext();
 
@@ -43,7 +43,7 @@ export function PostContextProvider({ children }) {
     setPosts([...mapped]);
   }
 
-  const createPost = (post) => {
+  const createPost = async (post) => {
     const body = new FormData();
     body.append("title", post.title);
     body.append("content", post.body);
@@ -58,7 +58,8 @@ export function PostContextProvider({ children }) {
       });
     }
 
-    const result = createPost(body);
+    const result = await createPostService(body);
+    await loadPosts();
     return result;
   };
 

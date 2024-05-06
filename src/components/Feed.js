@@ -7,7 +7,6 @@ import { ScaledSheet } from "react-native-size-matters";
 
 export function Feed({ navigation }) {
   const { loading, posts } = usePosts();
-  console.log(posts);
   const handleProfilePress = (user) => {
     navigation.navigate(ROUTES.USER_PROFILE, {
       uri: user.profilePic,

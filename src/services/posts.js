@@ -35,7 +35,7 @@ export function getExamplePosts() {
 
 async function getExampleUsers() {
     const USER_API_URL = 'https://fakerapi.it/api/v1/persons';
-    const PERSON_IMAGE_API_URL = 'https://api.dicebear.com/8.x/pixel-art/';
+    const PERSON_IMAGE_API_URL = 'https://api.dicebear.com/8.x/pixel-art/svg';
     const { data: results } = await fetch(USER_API_URL).then(res => { 
         return res.json()
     });
