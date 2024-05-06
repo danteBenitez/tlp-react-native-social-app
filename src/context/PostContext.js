@@ -18,7 +18,7 @@ const DEFAULT_POST = {
 
 export function PostContextProvider({ children }) {
   const [posts, setPosts] = useState([DEFAULT_POST]);
-  const [refetch, setRefetch] = useState(false);
+  const [refetch, setRefetch] = useState(true);
 
   const createPost = (post) => {
     const body = new FormData();

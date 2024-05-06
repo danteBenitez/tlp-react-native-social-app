@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "react-native-paper";
 import { useUser } from "../context/UserContext";
 import { ProfilePhoto } from "../components/ProfilePhoto";
+import { ROUTES } from "./routes";
 
 const IMAGE_SIZE = 200;
 
@@ -76,7 +77,7 @@ export function LoginUser({ navigation }) {
             updateUser({
               username: data.username,
             });
-            navigation.goBack();
+            navigation.navigate(ROUTES.HOME);
           })}
         >
             Enviar
