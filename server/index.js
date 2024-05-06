@@ -52,6 +52,7 @@ app.post("/post", (req, res) => {
       id: posts.length+1,
       title: req.body.title,
       content: req.body.content,
+      createdAt: new Date(),
       user: {
         profilePic: `/uploads/${filename}`,
         username: req.body.username
