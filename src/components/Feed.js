@@ -3,6 +3,7 @@ import { usePosts } from "../context/PostContext";
 import { Post } from "./Post";
 import { ROUTES } from "../screens/routes";
 import { ActivityIndicator } from "react-native-paper";
+import { ScaledSheet } from "react-native-size-matters";
 
 export function Feed({ navigation }) {
   const { loading, posts } = usePosts();
@@ -23,6 +24,7 @@ export function Feed({ navigation }) {
       )}
       {!loading && (
         <FlatList
+          contentContainerStyle={styles.feed}
           data={posts}
           renderItem={({ item: p }) => (
             <Post key={p.id} post={p} onProfilePress={handleProfilePress} />
@@ -33,9 +35,9 @@ export function Feed({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   feed: {
-    gap: 10,
+    gap: '10@s',
   },
   loading: {
     justifyContent: 'center',

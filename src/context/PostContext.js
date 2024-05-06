@@ -36,7 +36,7 @@ export function PostContextProvider({ children }) {
         ...post,
         user: {
           ...post.user,
-          profilePic: API_URL + post.user.profilePic ?? '',
+          profilePic: post.user.profilelPic ? API_URL + post.user.profilePic : '',
         },
         createdAt: new Date(post.createdAt),
     }))
