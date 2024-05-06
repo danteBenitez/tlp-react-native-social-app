@@ -48,3 +48,7 @@ $ npm run start
     - Un `StackNavigator` general, para pantallas que pueden sobreponerse a las pestañas.
     - Un `TabNavigator` para las pantallas principales.
 - Puede ver manejo de estado entre pantallas, por ejemplo, en la parte de configuración del usuario. Al subir una imagen de foto de perfil, el AppHeader se actualiza automáticamente para incluir dicha foto.
+
+## Implementación de fetching de datos
+
+- La aplicación carga publicaciones de ejemplo consultando una API de usuarios y otra de citas aleatorias. La implementación de dicha petición puede leerse en el archivo `src/services/posts.js`. La carga de datos se encuentra en el contexto `src/context/PostContext.js`, y el renderizado en `src/components/Feed.js`.
